@@ -5,6 +5,12 @@
  */
 package lab8;
 
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
 /**
  *
  * @author erick
@@ -32,7 +38,23 @@ public class Main_Menu_P extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tf_nombre_proyecto = new javax.swing.JTextField();
         jb_crear_proyecto = new javax.swing.JButton();
+        jd_create_activity = new javax.swing.JDialog();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        tf_nombre_activity = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        js_duracion = new javax.swing.JSpinner();
+        js_retraso = new javax.swing.JSpinner();
+        jLabel6 = new javax.swing.JLabel();
+        jb_guardar_actividad = new javax.swing.JButton();
+        cb_proyectos_nova = new javax.swing.JComboBox();
+        jd_add_differ_activity = new javax.swing.JDialog();
+        jLabel7 = new javax.swing.JLabel();
+        cb_actividades_project = new javax.swing.JComboBox();
+        jComboBox1 = new javax.swing.JComboBox();
+        jb_cancelar = new javax.swing.JButton();
+        jb_confrim = new javax.swing.JButton();
+        jb_ayuda = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jb_crearproject = new javax.swing.JButton();
         jb_crearactivity = new javax.swing.JButton();
@@ -45,6 +67,11 @@ public class Main_Menu_P extends javax.swing.JFrame {
         jLabel2.setText("Nombre");
 
         jb_crear_proyecto.setText("Crear proyecto");
+        jb_crear_proyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_crear_proyectoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_create_projectLayout = new javax.swing.GroupLayout(jd_create_project.getContentPane());
         jd_create_project.getContentPane().setLayout(jd_create_projectLayout);
@@ -80,7 +107,120 @@ public class Main_Menu_P extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
         );
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setFont(new java.awt.Font("Eurostile Extended", 0, 18)); // NOI18N
+        jLabel3.setText("Crear Actividad");
+
+        jLabel4.setText("Nombre");
+
+        jLabel5.setText("Duracion");
+
+        jLabel6.setText("T. Retraso");
+
+        jb_guardar_actividad.setText("Guardar");
+        jb_guardar_actividad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_guardar_actividadMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_create_activityLayout = new javax.swing.GroupLayout(jd_create_activity.getContentPane());
+        jd_create_activity.getContentPane().setLayout(jd_create_activityLayout);
+        jd_create_activityLayout.setHorizontalGroup(
+            jd_create_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_create_activityLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jd_create_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6))
+                .addGap(77, 77, 77)
+                .addGroup(jd_create_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_nombre_activity)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jd_create_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(js_retraso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                        .addComponent(js_duracion, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(jd_create_activityLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jb_guardar_actividad))
+                    .addComponent(cb_proyectos_nova, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
+        );
+        jd_create_activityLayout.setVerticalGroup(
+            jd_create_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_create_activityLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cb_proyectos_nova, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(jd_create_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tf_nombre_activity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jd_create_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(js_duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jd_create_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(js_retraso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(55, 55, 55)
+                .addComponent(jb_guardar_actividad)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        jLabel7.setFont(new java.awt.Font("Eurostile Extended", 0, 14)); // NOI18N
+        jLabel7.setText("Tipo de actividad: ");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Predecesor", "Sucesor" }));
+
+        jb_cancelar.setText("Cancelar");
+
+        jb_confrim.setText("Confirmar");
+
+        jb_ayuda.setText("Ayuda");
+        jb_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_ayudaMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_add_differ_activityLayout = new javax.swing.GroupLayout(jd_add_differ_activity.getContentPane());
+        jd_add_differ_activity.getContentPane().setLayout(jd_add_differ_activityLayout);
+        jd_add_differ_activityLayout.setHorizontalGroup(
+            jd_add_differ_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_add_differ_activityLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jd_add_differ_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jb_ayuda)
+                    .addGroup(jd_add_differ_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jd_add_differ_activityLayout.createSequentialGroup()
+                            .addComponent(jb_cancelar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                            .addComponent(jb_confrim))
+                        .addComponent(jLabel7)
+                        .addComponent(cb_actividades_project, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+        jd_add_differ_activityLayout.setVerticalGroup(
+            jd_add_differ_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_add_differ_activityLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(cb_actividades_project, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jb_ayuda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(jd_add_differ_activityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_cancelar)
+                    .addComponent(jb_confrim))
+                .addGap(21, 21, 21))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,6 +242,11 @@ public class Main_Menu_P extends javax.swing.JFrame {
         jb_crearactivity.setFocusable(false);
         jb_crearactivity.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jb_crearactivity.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jb_crearactivity.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_crearactivityMouseClicked(evt);
+            }
+        });
         jToolBar1.add(jb_crearactivity);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Project Nova");
@@ -132,7 +277,79 @@ public class Main_Menu_P extends javax.swing.JFrame {
 
     private void jb_crearprojectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearprojectMouseClicked
         // TODO add your handling code here:
+        jd_create_project.setModal(true);
+        jd_create_project.pack();
+        jd_create_project.setLocationRelativeTo(this);
+        jd_create_project.setVisible(true);
     }//GEN-LAST:event_jb_crearprojectMouseClicked
+
+    private void jb_crear_proyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crear_proyectoMouseClicked
+        // TODO add your handling code here:
+        String nombre= tf_nombre_proyecto.getText();
+        int duracion = 0;
+        String estado = "nulo";
+        proyectos.add(new CrearProyecto(duracion, nombre, estado));
+        JOptionPane.showMessageDialog(jd_create_project, "Project created");
+        tf_nombre_proyecto.setText("");
+        jd_create_project.dispose();
+        jd_create_project.setVisible(false);
+    }//GEN-LAST:event_jb_crear_proyectoMouseClicked
+
+    private void jb_guardar_actividadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_guardar_actividadMouseClicked
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(
+                jd_create_activity,
+                "Crear actividad como principal?",
+                "Confirm",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+      
+        if (response == JOptionPane.OK_OPTION) {
+            String con = tf_nombre_activity.getText();
+            int dur = (Integer)(js_duracion.getValue());
+            int retraso = (Integer)js_retraso.getValue();
+            int c = cb_proyectos_nova.getSelectedIndex();
+            proyectos.get(c).getListaActividades().add(new Actividades(con,dur, retraso ));
+            JOptionPane.showMessageDialog(jd_create_activity, "Se ha agregado actividad");
+            tf_nombre_activity.setText("");
+            js_duracion.setValue(0);
+            js_retraso.setValue(0);
+            jd_create_activity.dispose();
+            jd_create_activity.setVisible(false);
+        }
+        if (response != JOptionPane.OK_OPTION) {
+            int c = cb_proyectos_nova.getSelectedIndex();
+            var = c;
+            DefaultComboBoxModel modelo;
+            modelo = new DefaultComboBoxModel(proyectos.get(var).getListaActividades().toArray());
+            cb_actividades_project.setModel(modelo);
+            jd_add_differ_activity.setModal(true);
+            jd_add_differ_activity.pack();
+            jd_add_differ_activity.setLocationRelativeTo(jd_create_activity);
+            jd_add_differ_activity.setVisible(true);
+        }
+    }//GEN-LAST:event_jb_guardar_actividadMouseClicked
+
+    private void jb_crearactivityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearactivityMouseClicked
+        DefaultComboBoxModel modelo;
+        modelo = new DefaultComboBoxModel(proyectos.toArray());
+        cb_proyectos_nova.setModel(modelo);
+        jd_create_activity.setModal(true);
+        jd_create_activity.pack();
+        jd_create_activity.setLocationRelativeTo(this);
+        jd_create_activity.setVisible(true);
+    }//GEN-LAST:event_jb_crearactivityMouseClicked
+
+    private void jb_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_ayudaMouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(jd_add_differ_activity, "1/ Caja de seleccion Vacia: \n"
+                + "Esto ha ocurrido porque no ha agregado alguna actividad principal en su proyecto \n"
+                + "2/ Predecesor: \n"
+                + "En esta selecciona cual sera la actividad que viene antes de la actividad seleccionada \n"
+                + "3/ Sucesor: \n"
+                + "Esta es la actividad que se realizara una vez termine la actividad en ejecucion \n"
+                + "");
+    }//GEN-LAST:event_jb_ayudaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -170,16 +387,36 @@ public class Main_Menu_P extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox cb_actividades_project;
+    private javax.swing.JComboBox cb_proyectos_nova;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTree jTree1;
+    private javax.swing.JButton jb_ayuda;
+    private javax.swing.JButton jb_cancelar;
+    private javax.swing.JButton jb_confrim;
     private javax.swing.JButton jb_crear_proyecto;
     private javax.swing.JButton jb_crearactivity;
     private javax.swing.JButton jb_crearproject;
+    private javax.swing.JButton jb_guardar_actividad;
+    private javax.swing.JDialog jd_add_differ_activity;
+    private javax.swing.JDialog jd_create_activity;
     private javax.swing.JDialog jd_create_project;
+    private javax.swing.JSpinner js_duracion;
+    private javax.swing.JSpinner js_retraso;
+    private javax.swing.JTextField tf_nombre_activity;
     private javax.swing.JTextField tf_nombre_proyecto;
     // End of variables declaration//GEN-END:variables
+    ArrayList <CrearProyecto> proyectos = new ArrayList();
+    int var=0;
+    
+    
 }
