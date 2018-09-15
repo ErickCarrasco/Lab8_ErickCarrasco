@@ -496,7 +496,22 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_execute_dataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_execute_dataMouseClicked
         // TODO add your handling code here:
-        
+        try {
+            HiloExecute hilo = null;
+            int duracion;
+            String status = "Queue";
+            DefaultTableModel modeloTabla = (DefaultTableModel) tb_data_e.getModel();
+            
+            for (int i = 0; i <((proyectos)cb_proyectos.getSelectedItem()).getActividades().size(); i++) {
+                duracion = ((proyectos)cb_proyectos.getSelectedItem()).getActividades().get(i).getDuracion();
+                ((proyectos)cb_proyectos.getSelectedItem()).getActividades().get(i).getEstado_act();
+                duracion*=1000;
+                hilo = new HiloExecute(status,duracion, modeloTabla, i);
+                hilo.start();
+            }
+            
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jb_execute_dataMouseClicked
 
     public void update(){
@@ -507,21 +522,21 @@ public class Principal extends javax.swing.JFrame {
             m.setRoot(r);
             DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
             raiz.removeAllChildren();
-            DefaultMutableTreeNode n1 = null;
-            DefaultMutableTreeNode n2 = null;
-            DefaultMutableTreeNode n3 = null;
+            DefaultMutableTreeNode nodo1 = null;
+            DefaultMutableTreeNode nodo2 = null;
+            DefaultMutableTreeNode nodo3 = null;
             for (actividades t : p.getActividades()) {
                 if (t.getPredecesoras().isEmpty() && t.getSucesoras().isEmpty()) {
-                    n1 = new DefaultMutableTreeNode(t);
-                    raiz.add(n1);
+                    nodo1 = new DefaultMutableTreeNode(t);
+                    raiz.add(nodo1);
                 } else {
                     for (actividades s : t.getPredecesoras()) {
-                        n2 = new DefaultMutableTreeNode(s);
+                        nodo2 = new DefaultMutableTreeNode(s);
                         for (actividades c : s.getSucesoras()) {
-                            n3 = new DefaultMutableTreeNode(c);
-                            n3.add(n2);
+                            nodo3 = new DefaultMutableTreeNode(c);
+                            nodo3.add(nodo2);
                         }
-                        raiz.add(n3);
+                        raiz.add(nodo3);
                     }
                 }
             }

@@ -28,6 +28,7 @@ public class actividades {
         this.nombre = nombre;
         this.duracion = duracion;
         this.Posibilidad = Posibilidad;
+        this.estado_act="Standby";
     }
     
     public actividades(String nombre, int inicio, int duracion, int Final, String estado_act, String Posibilidad) {
