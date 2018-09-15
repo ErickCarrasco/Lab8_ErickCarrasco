@@ -498,13 +498,13 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             HiloExecute hilo = null;
-            int duracion;
-            String status = "Queue";
+            int duracion=0;
+            String status="void";
             DefaultTableModel modeloTabla = (DefaultTableModel) tb_data_e.getModel();
             
             for (int i = 0; i <((proyectos)cb_proyectos.getSelectedItem()).getActividades().size(); i++) {
                 duracion = ((proyectos)cb_proyectos.getSelectedItem()).getActividades().get(i).getDuracion();
-                ((proyectos)cb_proyectos.getSelectedItem()).getActividades().get(i).getEstado_act();
+                status=((proyectos)cb_proyectos.getSelectedItem()).getActividades().get(i).getEstado_act();
                 duracion*=1000;
                 hilo = new HiloExecute(status,duracion, modeloTabla, i);
                 hilo.start();

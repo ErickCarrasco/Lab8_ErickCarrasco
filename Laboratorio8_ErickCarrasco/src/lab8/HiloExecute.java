@@ -104,9 +104,9 @@ public class HiloExecute extends Thread{
             }
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10000);
 
-                duracion = -1000;
+                duracion -= 1000;
                 System.out.println(duracion);
             } catch (InterruptedException e) {
 
