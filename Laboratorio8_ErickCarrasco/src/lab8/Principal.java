@@ -7,6 +7,7 @@ package lab8;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -49,6 +50,10 @@ public class Principal extends javax.swing.JFrame {
         js_retraso = new javax.swing.JSpinner();
         cb_actividades = new javax.swing.JComboBox();
         jb_agregar_a = new javax.swing.JButton();
+        jd_execute_order = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tb_data_e = new javax.swing.JTable();
+        jb_execute_data = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_proyectos = new javax.swing.JTree();
@@ -185,6 +190,55 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jb_agregar_a)
                 .addGap(23, 23, 23))
+        );
+
+        tb_data_e.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Duracion", "Estado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tb_data_e);
+
+        jb_execute_data.setText("Execute");
+        jb_execute_data.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_execute_dataMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_execute_orderLayout = new javax.swing.GroupLayout(jd_execute_order.getContentPane());
+        jd_execute_order.getContentPane().setLayout(jd_execute_orderLayout);
+        jd_execute_orderLayout.setHorizontalGroup(
+            jd_execute_orderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_execute_orderLayout.createSequentialGroup()
+                .addGroup(jd_execute_orderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_execute_orderLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jd_execute_orderLayout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(jb_execute_data)))
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+        jd_execute_orderLayout.setVerticalGroup(
+            jd_execute_orderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_execute_orderLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jb_execute_data)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -430,8 +484,20 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_executeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_executeMouseClicked
         // TODO add your handling code here:
-        
+        try {
+            data_link();
+            jd_execute_order.setModal(true);
+            jd_execute_order.pack();
+            jd_execute_order.setLocationRelativeTo(this);
+            jd_execute_order.setVisible(true);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jb_executeMouseClicked
+
+    private void jb_execute_dataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_execute_dataMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jb_execute_dataMouseClicked
 
     public void update(){
         try {
@@ -461,6 +527,50 @@ public class Principal extends javax.swing.JFrame {
             }
             m.reload();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void data_link(){
+        try{
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_proyectos.getModel();
+            tb_data_e.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+            tb_data_e.setModel(new javax.swing.table.DefaultTableModel(
+                    new Object[][]{},
+                    new String[]{
+                        "Nombre", "Duracion", "Estado"
+                    }
+            ) {
+                Class[] types = new Class[]{
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+            
+            for (actividades t : ((proyectos) modelo.getElementAt(cb_proyectos.getSelectedIndex())).getActividades()) {
+                if (t.getPredecesoras().isEmpty()) {
+                    Object row[] = {t.getNombre(), t.getDuracion(), t.getEstado_act()};
+                    DefaultTableModel m
+                            = (DefaultTableModel) tb_data_e.getModel();
+                    m.addRow(row);
+                } else {
+                    Object row[] = {t.getNombre(), t.getDuracion(), t.getEstado_act()};
+                    DefaultTableModel m
+                            = (DefaultTableModel) tb_data_e.getModel();
+                    m.addRow(row);
+                }
+            }
+            
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -511,20 +621,24 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton jb_agregar;
     private javax.swing.JButton jb_agregar_a;
     private javax.swing.JButton jb_agregar_actividad;
     private javax.swing.JButton jb_eliminate;
     private javax.swing.JButton jb_execute;
+    private javax.swing.JButton jb_execute_data;
     private javax.swing.JButton jb_guardar;
     private javax.swing.JButton jb_modify_name;
     private javax.swing.JDialog jd_actividades;
+    private javax.swing.JDialog jd_execute_order;
     private javax.swing.JDialog jd_proyectos;
     private javax.swing.JSpinner js_duracion;
     private javax.swing.JSpinner js_duracion_a;
     private javax.swing.JSpinner js_retraso;
     private javax.swing.JTree jt_proyectos;
+    private javax.swing.JTable tb_data_e;
     private javax.swing.JTextField tf_nombre_a;
     private javax.swing.JTextField tf_nombre_p;
     // End of variables declaration//GEN-END:variables
